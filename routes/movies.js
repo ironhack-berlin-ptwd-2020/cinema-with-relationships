@@ -1,5 +1,6 @@
 const express = require('express');
 const Movie = require('../models/Movie');
+const Actor = require('../models/Actor');
 const router = express.Router();
 
 // /movies
@@ -11,30 +12,38 @@ router.get('/', (req, res) => {
 
 });
 
-// /movies/75465678798765ashgdjagsd
-router.get('/:id', (req, res) => {
-
-  Movie.findById(req.params.id).then((movie) => {
-    res.render('movie-details', movie)
-  })
-
-});
 
 // show form to user
 // GET /movies/create
 router.get('/create', (req, res) => {
-  res.render('new-movie')
+  Actor.find().then((actorsFromDB) => {
+    res.render('new-movie', { allActors: actorsFromDB })
+  })
+
 })
+
+
 
 // pick up data from submitted form
 // POST /movies/create
 router.post('/create', (req, res) => {
   console.log(req.body) // { title: 'Peter Pan', director: 'P. J. Hogan' }
-  Movie.create({ title: req.body.title, director: req.body.director }).then(() => {
+  Movie.create({ title: req.body.title, director: req.body.director, actors: [req.body.chosenActor] }).then(() => {
     res.redirect('/movies')
   })
 
 })
+
+
+// /movies/75465678798765ashgdjagsd
+router.get('/:id', (req, res) => {
+
+  Movie.findById(req.params.id).populate('actors').then((movie) => {
+    res.render('movie-details', movie)
+  })
+
+});
+
 
 // GET /movies/761623ut1i2u36tg/edit
 router.get('/:id/edit', (req, res) => {

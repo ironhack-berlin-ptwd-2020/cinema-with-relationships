@@ -1,7 +1,8 @@
 <div>
   MOVIES:
   {{#each myMovies}}
-  <p>{{this.title}}</p><a href="/movies/{{this._id}}/edit">(Edit)</a>
+  <p><a href="/movies/{{this._id}}">{{this.title}}</a></p>
+  <a href="/movies/{{this._id}}/edit">(Edit)</a>
   <form action="/movies/{{this._id}}/delete" method="post">
     <button>DELETE !</button>
   </form>

@@ -39,9 +39,11 @@ const index = require('./routes/index');
 app.use('/', index);
 
 // /movies
-// /movies/create
 const movies = require('./routes/movies')
 app.use('/movies', movies)
+
+// /actors
+app.use('/actors', require('./routes/actors'))
 
 
 module.exports = app;

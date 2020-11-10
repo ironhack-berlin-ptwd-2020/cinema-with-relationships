@@ -1,4 +1,12 @@
 Here be details:
 
-<p>{{title}}</p>
-<p>{{director}}</p>
+<p>Title: {{title}}</p>
+<p>Director: {{director}}</p>
+
+<h1>Actors:</h1>
+
+{{#each actors}}
+
+<p>{{this.name}}</p>
+
+{{/each}}

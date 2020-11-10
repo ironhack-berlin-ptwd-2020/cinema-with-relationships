@@ -11,7 +11,8 @@ const movieSchema = new Schema(
       String,
     description:
       String,
-    showtimes: [String]
+    showtimes: [String],
+    actors: [{ type: mongoose.Schema.ObjectId, ref: 'Actor' }]
   },
   {
     timestamps: true
